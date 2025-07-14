@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-refresher
+  labels:
+    app: redis-refresher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-refresher
+  template:
+    metadata:
+      labels:
+        app: redis-refresher
+    spec:
+      containers:
+        - name: redis-refresher
+          image: harish7305/redis-refresher:latest
+          imagePullPolicy: Always
+          env:
+            - name: NATS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: NATS_URL
+            - name: NATS_SUBJECT
+              value: "attendance.refresh"
+            - name: STREAM_NAME
+              value: "attendance"
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: REDIS_HOST
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: REDIS_PASSWORD
+            - name: TEMPORAL_ADDRESS
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: TEMPORAL_ADDRESS
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: JWT_SECRET
+      restartPolicy: Always
