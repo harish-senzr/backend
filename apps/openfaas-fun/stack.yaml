@@ -1,0 +1,24 @@
+version: 1.0
+
+provider:
+  name: openfaas
+  gateway: http://gateway.openfaas:8080
+
+functions:
+  heartbeat-handler1:
+    lang: node18
+    handler: ./heartbeat-handler1
+    image: harish7305/heartbeat-handler1:latest
+    secrets:
+      - backend-secrets
+    environment:
+      read_only_root_filesystem: false
+
+  postrecord-handler:
+    lang: node18
+    handler: ./postrecord-handler
+    image: harish7305/postrecord-handler:latest
+    secrets:
+      - backend-secrets
+    environment:
+      read_only_root_filesystem: false
