@@ -23,6 +23,7 @@
 // run();
 
 
+
 import { Worker } from '@temporalio/worker';
 import * as deviceActivities from './activities/device.activities';
 import { listenToNats } from './subscriber';

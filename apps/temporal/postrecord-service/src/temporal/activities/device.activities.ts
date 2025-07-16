@@ -6,7 +6,7 @@ import qs from 'qs';
 const BASE_URL = process.env.BASE_URL || 'http://localhost:8056'; // fallback optional
 const DIRECTUS_TOKEN = process.env.DIRECTUS_TOKEN;
 
-
+ 
 
 export async function prepareData(payload: any) {
   try {

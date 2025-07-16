@@ -8,17 +8,33 @@ functions:
   heartbeat-handler1:
     lang: node18
     handler: ./heartbeat-handler1
-    image: harish7305/heartbeat-handler1:latest
+    image: iwinxdigitaltechnologies/heartbeat-handler1:latest
     secrets:
       - backend-secrets
     environment:
+      REDIS_URL: "{{REDIS_URL}}"
+      JWT_SECRET: "{{JWT_SECRET}}"
       read_only_root_filesystem: false
+    limits:
+      memory: 128Mi
+      cpu: 100m
+    requests:
+      memory: 64Mi
+      cpu: 50m
 
   postrecord-handler:
     lang: node18
     handler: ./postrecord-handler
-    image: harish7305/postrecord-handler:latest
+    image: iwinxdigitaltechnologies/postrecord-handler:latest
     secrets:
       - backend-secrets
     environment:
+      REDIS_URL: "{{REDIS_URL}}"
+      JWT_SECRET: "{{JWT_SECRET}}"
       read_only_root_filesystem: false
+    limits:
+      memory: 128Mi
+      cpu: 100m
+    requests:
+      memory: 64Mi
+      cpu: 50m

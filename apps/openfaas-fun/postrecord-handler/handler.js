@@ -1,12 +1,14 @@
 const { connect, StringCodec } = require('nats');
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 
-const NATS_URL = process.env.NATS_URL || 'nats://192.168.1.49:4222';
+
+// const NATS_URL = process.env.NATS_URL || 'nats://192.168.1.49:4222';
+const NATS_URL = fs.readFileSync('/var/openfaas/secrets/NATS_URL', 'utf8').trim();
+
 const NATS_SUBJECT =  'attendance.face';
 const STREAM_NAME = 'attendance';
-const JWT_SECRET =
-  process.env.JWT_SECRET ||
-  'e4f3a93b4c41b3d6f94f19a7a1c9fcb8a3c734c6cd7416c3a64fbd09b2b71523e24f3a93b4c41b3d6f94f19a7a1c9fcb8a3c734c6cd7416c3a64fbd09b2b71523';
+const JWT_SECRET =  'e4f3a93b4c41b3d6f94f19a7a1c9fcb8a3c734c6cd7416c3a64fbd09b2b71523e24f3a93b4c41b3d6f94f19a7a1c9fcb8a3c734c6cd7416c3a64fbd09b2b71523';
 
 module.exports = async (event, context) => {
   try {

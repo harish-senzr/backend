@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: heartbeat-service
+  namespace: default
   labels:
     app: heartbeat-service
 spec:
@@ -16,9 +17,10 @@ spec:
     spec:
       containers:
         - name: heartbeat-service
-          image: harish7305/heartbeat-service:latest
+          image: iwinxdigitaltechnologies/heartbeat-service:latest
           imagePullPolicy: Always
           env:
+            # NATS Config
             - name: NATS_URL
               valueFrom:
                 secretKeyRef:
@@ -28,6 +30,8 @@ spec:
               value: "attendance.heartbeat"
             - name: STREAM_NAME
               value: "attendance"
+
+            # Redis Config
             - name: REDIS_HOST
               valueFrom:
                 secretKeyRef:
@@ -38,14 +42,14 @@ spec:
                 secretKeyRef:
                   name: backend-secrets
                   key: REDIS_PASSWORD
+
+            # Temporal Config
             - name: TEMPORAL_ADDRESS
               valueFrom:
                 secretKeyRef:
                   name: backend-secrets
                   key: TEMPORAL_ADDRESS
-            - name: JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: backend-secrets
-                  key: JWT_SECRET
+
+
+
       restartPolicy: Always

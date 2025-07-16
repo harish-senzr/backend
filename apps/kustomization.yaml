@@ -5,3 +5,4 @@ resources:
   - shared-secrets
   - temporal
   - openfaas-fun
+  

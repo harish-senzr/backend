@@ -12,7 +12,7 @@ const sc = StringCodec();
 export const listenToNats = async () => {
     const natsUrl = process.env.NATS_URL;
 
-  console.log("Starting NATS listener...");
+  console.log("Starting NATS listener...",natsUrl);
 
   // const nc = await connect({ servers: "nats://192.168.1.49:4222" });
   const nc = await connect({ servers: natsUrl });

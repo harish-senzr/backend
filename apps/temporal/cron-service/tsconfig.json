@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2021",
-    "module": "commonjs",
-    "lib": ["ES2021"],
+    "target": "ES2020",
+    "module": "CommonJS",
     "moduleResolution": "node",
-    "outDir": "dist",
-    "rootDir": "src",
+    "lib": ["ES2020"],
     "esModuleInterop": true,
     "strict": true,
-    "types": ["node"]
+    "types": ["node"],
+    "rootDir": "src",
+    "outDir": "dist"
   },
   "include": ["src"]
 }
