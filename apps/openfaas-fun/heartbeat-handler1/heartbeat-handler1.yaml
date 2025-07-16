@@ -1,0 +1,21 @@
+apiVersion: openfaas.com/v1
+kind: Function
+metadata:
+  name: heartbeat-handler1
+  namespace: default
+spec:
+  name: heartbeat-handler1
+  image: iwinxdigitaltechnologies/heartbeat-handler1:latest
+  handler: ./heartbeat-handler1
+  environment:
+    REDIS_URL: "{{REDIS_URL}}"
+    JWT_SECRET: "{{JWT_SECRET}}"
+    read_only_root_filesystem: "false"
+  secrets:
+    - backend-secrets
+  limits:
+    memory: "128Mi"
+    cpu: "100m"
+  requests:
+    memory: "64Mi"
+    cpu: "50m"

@@ -1,0 +1,21 @@
+apiVersion: openfaas.com/v1
+kind: Function
+metadata:
+  name: postrecord-handler
+  namespace: default
+spec:
+  name: postrecord-handler
+  image: iwinxdigitaltechnologies/postrecord-handler:latest
+  handler: ./postrecord-handler
+  environment:
+    REDIS_URL: "{{REDIS_URL}}"
+    JWT_SECRET: "{{JWT_SECRET}}"
+    read_only_root_filesystem: "false"
+  secrets:
+    - backend-secrets
+  limits:
+    memory: "128Mi"
+    cpu: "100m"
+  requests:
+    memory: "64Mi"
+    cpu: "50m"
